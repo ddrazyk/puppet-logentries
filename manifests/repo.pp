@@ -7,7 +7,7 @@ class logentries::repo {
   # facter < 1.6.1
   include logentries::helpers::oldfacter
 
-  case $::architecture {
+  case $::facts['os']['architecture'] {
     'x86': {
       $yum_architecture = 'i386'
     }
@@ -18,7 +18,7 @@ class logentries::repo {
       $yum_architecture = $::architecture
     }
   }
-  case $::osfamily {
+  case $::facts['os']['family'] {
     debian: {
       case $::lsbdistcodename {
         'karmic', 'lenny', 'lucid', 'maverick',
@@ -36,7 +36,7 @@ class logentries::repo {
       }
     }
     redhat: {
-      case $::lsbmajdistrelease {
+      case $::facts['os']['release']['major'] {
         '6', '7': {
           class {'logentries::repo::yum':
             baseurl => "http://rep.logentries.com/centos6/${yum_architecture}",
