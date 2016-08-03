@@ -1,0 +1,7 @@
+class Form_Line_Only(object):
+  def __init__(self, hostname, log_name, token):
+    self.hostname = hostname
+    self.log_name = log_name
+    self.token = token
+  def format_line(self, line):
+    return '%s - %s - %s'%(self.token, self.hostname, line)
